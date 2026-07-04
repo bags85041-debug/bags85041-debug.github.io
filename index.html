@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>내가 싫어하는 사람들</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a0033 0%, #330066 50%, #4d0080 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            font-family: 'Gungsuh', '궁서', serif;
+            color: black;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-section {
+            margin-bottom: 40px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 16px;
+            border: 3px solid #ff00ff;
+            border-radius: 8px;
+            background-color: #ffccff;
+            color: black;
+            font-family: 'Gungsuh', '궁서', serif;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+        }
+
+        .search-box:focus {
+            outline: none;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.8);
+            background-color: #ffe6ff;
+        }
+
+        .list-section {
+            background-color: rgba(255, 204, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5),
+                        0 0 40px rgba(255, 0, 255, 0.4);
+            border: 3px dashed #ff00ff;
+        }
+
+        .list-section h2 {
+            font-size: 28px;
+            margin-bottom: 25px;
+            color: black;
+            text-shadow: 2px 2px 0px rgba(255, 0, 255, 0.3);
+        }
+
+        .dislike-list {
+            list-style: none;
+        }
+
+        .dislike-list li {
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background-color: #ffccff;
+            border-left: 5px solid #ff0099;
+            color: black;
+            font-size: 18px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .dislike-list li:before {
+            content: "✕";
+            position: absolute;
+            left: 10px;
+            color: #ff0099;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .dislike-list li {
+            padding-left: 40px;
+        }
+
+        .dislike-list li:hover {
+            background-color: #ff99ff;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .reason {
+            font-size: 14px;
+            color: #660066;
+            margin-top: 8px;
+            padding: 10px;
+            background-color: #ffddff;
+            border-radius: 4px;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        .person-item {
+            margin-bottom: 15px;
+        }
+
+        .header-buttons {
+            position: fixed;
+            top: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 100;
+        }
+
+        .report-link {
+            background-color: #ff00ff;
+            color: black;
+            padding: 12px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-family: 'Gungsuh', '궁서', serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border: 2px solid #cc00cc;
+        }
+
+        .report-link:hover {
+            background-color: #ff33ff;
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(255, 0, 255, 0.5);
+        }
+
+        .rebellion-button {
+            background-color: #ff0000;
+            color: white;
+            padding: 20px 40px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 22px;
+            font-family: 'Gungsuh', '궁서', serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            border: 3px solid #990000;
+        }
+
+        .rebellion-button:hover {
+            background-color: #ff3333;
+            transform: scale(1.1);
+            box-shadow: 0 8px 16px rgba(255, 0, 0, 0.6);
+        }
+
+        .rebellion-button:active {
+            transform: scale(0.95);
+        }
+
+        .container {
+            margin-top: 80px;
+        }
+
+        @media (max-width: 500px) {
+            .list-section {
+                padding: 20px;
+            }
+
+            .dislike-list li {
+                font-size: 16px;
+            }
+
+            .reason {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-buttons">
+        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1" class="report-link">개발자한테 신고</a>
+        <button class="rebellion-button" onclick="playScream()">반란</button>
+    </div>
+
+    <div class="container">
+        <div class="search-section">
+            <input type="text" class="search-box" placeholder="검색...">
+        </div>
+
+        <div class="list-section">
+            <h2>내가 싫어하는 사람들</h2>
+            <ul class="dislike-list">
+                <li class="person-item">
+                    홍명보
+                    <div class="reason">홍명보의 지능과 치킨무의 지능이 같다.</div>
+                </li>
+                <li class="person-item">
+                    트럼프
+                    <div class="reason">언제는 이란 공격한데며 왜 골프를 치고있어 이란 멸망하면 우리나라 32강 갈수있어 근데 왜 안하냐고</div>
+                </li>
+                <li class="person-item">
+                    설영우
+                    <div class="reason">설영우는 크로스의 크자를 몰라서 그런걸까?</div>
+                </li>
+                <li class="person-item">
+                    백종원
+                    <div class="reason">일반인은 농약통으로 보이는데 너는 이게 지금 소스통으로 보이냐?</div>
+                </li>
+                <li class="person-item">
+                    스탈린
+                    <div class="reason">하...너는 그냥 독재자 잖아 이 김정은 보다 심한 놈아.</div>
+                </li>
+                <li class="person-item">
+                    남아프리카 공화국
+                    <div class="reason">아니 6.25에 병사들 지원은 고마운데 너만 없으면 우리나라 32강 간다고</div>
+                </li>
+                <li class="person-item">
+                    히틀러
+                    <div class="reason">이야 너는 나라를 몇개를 점령했는데 진짜 자살해도 싸 이건 독일이 폭파해도 고마운줄 알아라 그리고 어떻게 진짜 우주 점령 처럼 보이다가 영국한테 지냐 진짜 어이가 없누</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function playScream() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const now = audioContext.currentTime;
+            const duration = 2;
+
+            // 비명을 내는 톤
+            const osc1 = audioContext.createOscillator();
+            const osc2 = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+
+            osc1.type = 'sine';
+            osc2.type = 'triangle';
+
+            osc1.frequency.setValueAtTime(600, now);
+            osc1.frequency.exponentialRampToValueAtTime(1200, now + duration * 0.3);
+            osc1.frequency.exponentialRampToValueAtTime(400, now + duration);
+
+            osc2.frequency.setValueAtTime(800, now);
+            osc2.frequency.exponentialRampToValueAtTime(1500, now + duration * 0.3);
+            osc2.frequency.exponentialRampToValueAtTime(300, now + duration);
+
+            gain.gain.setValueAtTime(0.5, now);
+            gain.gain.exponentialRampToValueAtTime(0.9, now + duration * 0.1);
+            gain.gain.exponentialRampToValueAtTime(0.3, now + duration);
+
+            osc1.connect(gain);
+            osc2.connect(gain);
+            gain.connect(audioContext.destination);
+
+            osc1.start(now);
+            osc2.start(now);
+            osc1.stop(now + duration);
+            osc2.stop(now + duration);
+        }
+    </script>
+</body>
+</html>
